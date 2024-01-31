@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet" href="./admin.css">
+</head>
+<body>
+  <h1 id="search">My Projects</h1>
+  <br><br>
+  <input type="text" id="newProjectName" placeholder="Project Name">
+  <input type="text" id="newImageUrl" placeholder="Image URL">
+  <input type="text" id="newLink" placeholder="Link">
+  <input type="text" id="newTags" placeholder="Tags (Ex:React,Angular)">
+  <button class="new" onclick="addNewProject()">+ New Project</button>
+  <br><br>
+  <table id="projectTable">
+    <tr>
+      <th>Project Name</th>
+      <th>Image URL</th>
+      <th>Link</th>
+      <th>Tags</th>
+      <th>Action</th>
+    </tr>
+  </table>
+  <div id="updateModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeUpdateModal()">&times;</span>
+      <h2>Update Project</h2>
+      <input type="text" id="updateProjectName" placeholder="Project Name">
+      <input type="text" id="updateImageUrl" placeholder="Image URL">
+      <input type="text" id="updateLink" placeholder="Link">
+      <input type="text" id="updateTags" placeholder="Tags (Ex:React,Angular)">
+      <button class="update" onclick="updateProject()">Update Project</button>
+    </div>
+  </div>
+  <script src="./admin.js"></script>
+</body>
+</html>

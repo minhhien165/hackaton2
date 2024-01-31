@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Projects</title>
+  <style>
+    /* ... (CSS styles remain unchanged) ... */
+  </style>
+</head>
+<body>
+  <h1>My Projects</h1>
+  <br><br>
+  <input type="text" id="search" placeholder="Project Name">
+  <input type="text" id="newProjectName" placeholder="New Project Name">
+  <input type="text" id="newImageUrl" placeholder="Image URL">
+  <input type="text" id="newLink" placeholder="Link">
+  <input type="text" id="newTags" placeholder="Tags (Ex:React,Angular)">
+  <button class="new" onclick="addNewProject()">+ New Project</button>
+  <br><br>
+  <table id="projectTable">
+    <tr>
+      <th>Project Name</th>
+      <th>Image URL</th>
+      <th>Link</th>
+      <th>Tags</th>
+      <th>Action</th>
+    </tr>
+  </table>
+  <div id="updateModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeUpdateModal()">&times;</span>
+      <h2>Update Project</h2>
+      <input type="text" id="updateProjectName" placeholder="Project Name">
+      <input type="text" id="updateImageUrl" placeholder="Image URL">
+      <input type="text" id="updateLink" placeholder="Link">
+      <input type="text" id="updateTags" placeholder="Tags (Ex:React,Angular)">
+      <button class="update" onclick="updateProject()">Update Project</button>
+    </div>
+  </div>
+  <script>
+    // Lấy dữ liệu từ localStorage
+    const storedProjects = JSON.parse(localStorage.getItem('projects')) || [];
+
+    // Hiển thị dữ liệu trong bảng
+    const projectTable = document.getElementById('projectTable');
+
+    function displayProjects() {
+      if (storedProjects) {
+        storedProjects.forEach(project => {
+          const row = projectTable.insertRow(-1);
+          row.setAttribute('data-id', project.id); // Thêm thuộc tính data-id cho dòng
+
+          const cell1 = row.insertCell(0);
+          const cell2 = row.insertCell(1);
+          const cell3 = row.insertCell(2);
+          const cell4 = row.insertCell(3);
+          const cell5 = row.insertCell(4);
+
+          cell1.textContent = project.projectName;
+          cell2.innerHTML = `<img src="${project.imgUrl}" alt="${project.projectName}">`;
+          cell3.innerHTML = `<a href="${project.link}" target="_blank">Link</a>`;
+          cell4.textContent = project.tags.join(', ');
+          cell5.innerHTML = `<button class="delete" onclick="deleteProject(${project.id})">Delete</button> <button class="update" onclick="openUpdateModal(${project.id})">Update</button>`;
+        });
+      }
+    }
+
+    // Thêm sự kiện tìm kiếm
+    const search = document.getElementById('search');
+    const rows = projectTable.querySelectorAll('tr:not(:first-child)');
+    search.addEventListener('keyup', function(event) {
+      const term = event.target.value.toLowerCase();
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        let found = false;
+        cells.forEach(cell => {
+          if (cell.textContent.toLowerCase().includes(term)) {
+            found = true;
+          }
+        });
+        if (found) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+
+    // Hàm thêm mới dự án
+    function addNewProject() {
+      const newName = document.getElementById('newProjectName').value;
+      const newImageUrl = document.getElementById('newImageUrl').value;
+      const newLink = document.getElementById('newLink').value;
+      const newTags = document.getElementById('newTags').value.split(',');
+
+      // Kiểm tra các trường thông tin có được nhập đầy đủ không
+      if (newName && newImageUrl && newLink && newTags) {
+        // Tạo đối tượng mới dự án
+        const newProject = {
+          id: Date.now(), // Sử dụng timestamp để tạo id duy nhất
+          projectName: newName,
+          imgUrl: newImageUrl,
+          link: newLink,
+          tags: newTags.map(tag => tag.trim()), // Xóa khoảng trắng ở đầu và cuối mỗi tag
+        };
+
+        // Thêm dự án mới vào mảng storedProjects
+        storedProjects.push(newProject);
+
+        // Lưu lại mảng updated vào localStorage
+        localStorage.setItem('projects', JSON.stringify(storedProjects));
+
+        // Hiển thị dự án mới trong bảng
+        const row = projectTable.insertRow(-1);
+        row.setAttribute('data-id', newProject.id); // Thêm thuộc tính data-id cho dòng
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+        const cell3 = row.insertCell(2);
+        const cell4 = row.insertCell(3);
+        const cell5 = row.insertCell(4);
+
+        cell1.textContent = newProject.projectName;
+        cell2.innerHTML = `<img src="${newProject.imgUrl}" alt="${newProject.projectName}">`;
+        cell3.innerHTML = `<a href="${newProject.link}" target="_blank">Link</a>`;
+        cell4.textContent = newProject.tags.join(', ');
+        cell5.innerHTML = `<button class="delete" onclick="deleteProject(${newProject.id})">Delete</button> <button class="update" onclick="openUpdateModal(${newProject.id})">Update</button>`;
+
+        // Clear các trường input sau khi thêm mới
+        document.getElementById('newProjectName').value = '';
+        document.getElementById('newImageUrl').value = '';
+        document.getElementById('newLink').value = '';
+        document.getElementById('newTags').value = '';
+      } else {
+        alert('Please fill in all fields.');
+      }
+    }
+
+    // Hàm mở modal chỉnh sửa
+    function openUpdateModal(projectId) {
+      const projectToUpdate = storedProjects.find(project => project.id === projectId);
+
+      // Điền thông tin dự án vào các trường input trong modal
+      document.getElementById('updateProjectName').value = projectToUpdate.projectName;
+      document.getElementById('updateImageUrl').value = projectToUpdate.imgUrl;
+      document.getElementById('updateLink').value = projectToUpdate.link;
+      document.getElementById('updateTags').value = projectToUpdate.tags.join(', ');
+
+      // Gắn thuộc tính data-id cho modal
+      const updateModal = document.getElementById('updateModal');
+      updateModal.setAttribute('data-id', projectId);
+
+      // Hiển thị modal
+      updateModal.style.display = 'block';
+    }
+
+    // Hàm đóng modal chỉnh sửa
+    function closeUpdateModal() {
+      const updateModal = document.getElementById('updateModal');
+      updateModal.removeAttribute('data-id'); // Xóa thuộc tính data-id
+      updateModal.style.display = 'none';
+    }
+
+    // Hàm cập nhật dự án
+    function updateProject() {
+      const projectName = document.getElementById('updateProjectName').value;
+      const imageUrl = document.getElementById('updateImageUrl').value;
+      const link = document.getElementById('updateLink').value;
+      const tags = document.getElementById('updateTags').value.split(',');
+
+      // Kiểm tra các trường thông tin có được nhập đầy đủ không
+      if (projectName && imageUrl && link && tags) {
+        const projectId = parseInt(document.getElementById('updateModal').getAttribute('data-id'));
+
+        // Cập nhật thông tin dự án trong mảng storedProjects
+        const updatedProjects = storedProjects.map(project => {
+          if (project.id === projectId) {
+            return {
+              ...project,
+              projectName: projectName,
+              imgUrl: imageUrl,
+              link: link,
+              tags: tags.map(tag => tag.trim()), // Xóa khoảng trắng ở đầu và cuối mỗi tag
+            };
+          } else {
+            return project;
+          }
+        });
+
+        // Lưu mảng updated vào localStorage
+        localStorage.setItem('projects', JSON.stringify(updatedProjects));
+
+        // Đóng modal
+        closeUpdateModal();
+
+        // Cập nhật dự án trong bảng
+        const rowToUpdate = document.querySelector(`tr[data-id="${projectId}"]`);
+        if (rowToUpdate) {
+          const cells = rowToUpdate.querySelectorAll('td');
+          cells[0].textContent = projectName;
+          cells[1].innerHTML = `<img src="${imageUrl}" alt="${projectName}">`;
+          cells[2].innerHTML = `<a href="${link}" target="_blank">Link</a>`;
+          cells[3].textContent = tags.join(', ');
+        }
+      } else {
+        alert('Please fill in all fields.');
+      }
+    }
+
+    // Hàm xoá dự án
+    function deleteProject(projectId) {
+      // Lọc ra mảng mới không chứa dự án cần xoá
+      const updatedProjects = storedProjects.filter(project => project.id !== projectId);
+
+      // Lưu mảng updated vào localStorage
+      localStorage.setItem('projects', JSON.stringify(updatedProjects));
+
+      // Xóa dự án khỏi bảng
+      const rowToDelete = document.querySelector(`tr[data-id="${projectId}"]`);
+      if (rowToDelete) {
+        rowToDelete.remove();
+      }
+    }
+
+    // Hiển thị dự án khi trang được tải
+    displayProjects();
+  </script>
+</body>
+</html>

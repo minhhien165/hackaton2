@@ -1,0 +1,357 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 15px;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(81, 87, 87);
+}
+
+.header {
+    width: 100%;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+}
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+.header-container img{
+    height: 20px;
+    width: 20px;
+}
+.main-icon {
+    font-size: 20px;
+    color: rgb(7, 8, 10);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 150px;
+}
+
+.container-input {
+    width: 100px;
+    height: 30px;
+    color: rgb(31, 224, 224);
+    font-size: 12px;
+    box-shadow: rgba(6, 196, 230, 0.02) 0px 1px 3px 0px, rgba(1, 188, 240, 0.15) 0px 0px 0px 1px;
+    display: flex;
+    margin: 150px;
+    gap: 7px;
+    align-items: center;
+    justify-content: center;
+}
+.container-input .material-symbols-outlined{
+    font-size: 15px;
+}
+
+.navbar-backrout{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-image: url(https://img2.thuthuatphanmem.vn/uploads/2018/11/30/hinh-nen-mau-trang-xam_104324807.jpg);
+    background-size: 100%;
+}
+.navbar-backrout img{
+    width: 400px;
+    height: 600px;
+    margin-left: 50px;
+}
+
+.navbar-item a {
+    padding-left: 200px;
+    color: rgb(69, 69, 64);
+    font-size: 20px;
+}
+.navbar-item p{
+    font-size: 50px;
+    color: rgb(61, 58, 58);
+    font-weight: 600;
+    padding-left: 50px;
+}
+#item-p{
+    padding-left: 180px;
+}
+.navbar-item input{
+    background-color: rgb(20, 204, 192);
+    width: 110px;
+    height: 35px;
+    border: 0;
+    color: aliceblue;
+    font-weight: 600;
+    border-radius: 5%;
+    margin-left: 250px;
+}
+
+
+.details-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 90px;
+}
+.personal-details {
+    width: 40%;
+    float: left;
+    margin: 20px;
+    padding: 10px;
+    padding-left: 100px;
+}
+.personal-details p{
+    color: rgb(123, 134, 194);
+}
+.icons img {
+    width: 35px;
+    height: 35px;
+    margin: 5px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.484);
+}
+.additional-info {
+    width: 40%;
+    float: right;
+    margin: 10px;
+    padding: 10px;
+    padding-top: 20px;
+}
+.additional-info .info-item {
+    display: flex;
+    align-items: center;
+    margin: 6px;
+}
+.info-item span{
+    color: rgb(43, 112, 161);
+}
+.additional-info label {
+    width: 40%;
+    font-weight: bold;
+}
+.container2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 80%;
+    padding-left: 30vh;
+}
+.logo2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 100px;
+    margin: 10px;
+    padding: 10px;
+    gap: 10px;
+    border-radius: 5px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.logo2 img {
+    width: 30px;
+    height: 30px;
+}
+.p-1 {
+    font-size: 16px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.719);
+}
+.p-2{
+    font-size: 8px;
+}
+
+.work{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.left1{
+    width: 131px;
+    height: 42px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    position: relative;
+    left: 10px;
+    margin-top: 70px;
+}
+.left1 h1{
+    font-size: 16px;
+}
+.project{
+    border-top: 1px dashed #ccc;
+}
+.categories {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: #ccc;
+}
+
+.row{
+    padding: 50px;
+}
+.row-img1{
+    height: 50px;
+    width: 50px;
+    margin-bottom: -30px;
+}
+.row-img2{
+    height: 50px;
+    width: 50px;
+    margin-bottom: -30px;
+}
+.row-img3{
+    height: 50px;
+    width: 50px;
+    margin-bottom: -30px;
+}
+.row-img4{
+    height: 50px;
+    width: 50px;
+    margin-top: -30px;
+}
+.row-img5{
+    height: 50px;
+    width: 50px;
+    margin-bottom: -30px;
+}
+.row p{
+    margin-left: 50px;
+}
+.row span{
+    font-size: 20px;
+}
+.row input{
+    background-color: rgb(187, 187, 236);
+    width: 100px;
+    height: 20px;
+    border:1px solid #ccc;
+}
+
+
+.Contact-background {
+    width: 75%;
+    height: 550px;
+    background-color: #fafbfd;
+    position: relative;
+    margin: 100px;
+}
+.form-1 {
+    position: absolute;
+    height: 550px;
+    width: 650px;
+    left: 0px;
+}
+.form-2 {
+    position: absolute;
+    height: 548px;
+    width: 400px;
+    right: 0px;
+    background-color: white;
+    padding-left: 200px;
+}
+.form-right{
+    margin-top: 50px;
+}
+.form-right .item-form{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.item-form div{
+    display: flex;
+    flex-direction: column;
+}
+.item-form div span:first-child {
+    color: #0c0c0ce8;
+    font-weight: 500;
+    font-size: 16px;
+}
+.item-form div span:last-child {
+    color: #696c6dba;
+    font-weight: 500;
+}
+.form {
+    display: flex;
+    gap: 50px;
+    margin-top: 30px;
+}
+#butt {
+    background-color: #07bcd4;
+    margin-left: 28px;
+    margin-top: 70px;
+    height: 38px;
+    width: 118px;
+    border: 1px;
+    border-radius: 4px;
+    color: white;
+}
+label {
+    font-size: 14px;
+    font-weight: 600;
+}
+input {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    height: 40px;
+    width: 250px;
+}
+
+
+.footer {
+    background-color: rgb(22, 22, 56);
+    color:white;
+}
+.footer-logo img {
+    height: 20px;
+    width: 20px;
+}
+.logo-font {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+table {
+    width: 80%; 
+    margin-top: 20px;
+    margin-left: 120px;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+td{
+    color: rgba(203, 205, 211, 0.301)
+}
+.footer-icon{
+    display: flex;
+    gap: 20px;
+}
+.footer-item{
+    color: blue;
+}
+.fa-heart{
+    color:red;
+}
